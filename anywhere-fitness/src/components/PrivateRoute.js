@@ -15,9 +15,11 @@ const PrivateRoute = ({ component: Component, dummyData, ...rest }) => {
     return <Redirect to="/instructor-login" />;
   }
 
+
   return (
     <Route
       {...rest}
+      
       render={props => {
         if (localStorage.getItem("token")) {
           return <Component {...props} dummyData={dummyData} />;

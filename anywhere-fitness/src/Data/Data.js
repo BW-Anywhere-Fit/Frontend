@@ -1,5 +1,6 @@
 const Data = [
   {
+    id: 1,
     name: "Leg-Day",
     type: "Lift",
     startTime: "8:00 pm EST",
@@ -8,9 +9,11 @@ const Data = [
     location: "USA",
     registeredAttendees: 0,
     maxClassSize: "5"
+    
   },
 
   {
+    id: 2,
     name: "Heart Fit",
     type: "Cardio",
     startTime: "5:00 pm EST",
@@ -19,6 +22,7 @@ const Data = [
     location: "Moon",
     registeredAttendees: 0,
     maxClassSize: "35"
+    
   }
 ];
 
