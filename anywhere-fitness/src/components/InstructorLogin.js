@@ -1,13 +1,21 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import useUser from "../context/useUser";
 
 const InstructorLogin = () => {
+  const { user, login } = useUser();
+
   const [instructorCredentials, setInstructorCredentials] = React.useState({
     username: "",
     password: ""
   });
+
+  if (user.data) {
+    return <Redirect to="/classes" />;
+  }
 
   const handleOnChange = e => {
     e.preventDefault();
@@ -19,17 +27,7 @@ const InstructorLogin = () => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-    // axios call
-    // axiosWithAuth()
-    //   .post("/instructor-login", instructorCredentials)
-    //   .then(res => {
-    //     // console.log(res);
-    //     localStorage.setItem("token", res.data.payload);
-    //     props.history.push("/classes");
-    //   })
-    //   .catch(err => {
-    //     console.log(err.response);
-    //   });
+    login(instructorCredentials);
   };
 
   return (
@@ -54,8 +52,8 @@ const InstructorLogin = () => {
           onChange={handleOnChange}
           value={instructorCredentials.password}
         />
+        <Button type="submit">Login</Button>
       </form>
-      <Button>Login</Button>
     </div>
   );
 };

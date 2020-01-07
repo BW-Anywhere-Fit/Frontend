@@ -7,9 +7,14 @@ import InstructorLogin from "./components/InstructorLogin";
 // import ClientLogin from "./components/ClientLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import ClassList from "./components/ClassList";
+
+
+import UserProvider from "./context/UserProvider";
+
 import Data from './Data/Data'
 import ClassCard from "./components/ClassCard";
  import ClassDetails from "./components/ClassDetails"
+
 
 // axios get, put, post
 // routing
@@ -37,6 +42,7 @@ console.log(dummyData)
         </Switch>
       </Router>
     </div>
+
   );
   }
 
