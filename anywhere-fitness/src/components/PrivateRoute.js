@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 import useUser from "../context/useUser";
 
-const PrivateRoute = ({ component: Component, dummyData, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user } = useUser();
   const { error, loading, data } = user;
   if (loading) return null;
@@ -22,7 +22,7 @@ const PrivateRoute = ({ component: Component, dummyData, ...rest }) => {
       
       render={props => {
         if (localStorage.getItem("token")) {
-          return <Component {...props} dummyData={dummyData} />;
+          return <Component {...props}  />;
         } else {
           return <Redirect to="/instructor-login" />;
         }

@@ -10,7 +10,6 @@ import NavBar from "./components/NavBar";
 
 import UserProvider from "./context/UserProvider";
 
-import Data from "./Data/Data";
 // import ClassCard from "./components/ClassCard";
 import ClassDetails from "./components/ClassDetails";
 import RegisterForm from "./components/RegisterForm";
@@ -19,8 +18,7 @@ import RegisterForm from "./components/RegisterForm";
 // routing
 
 function App() {
-  const [dummyData] = useState({ Data });
-  console.log(dummyData);
+
 
   return (
     <div className="Page">
@@ -36,12 +34,10 @@ function App() {
               <PrivateRoute
                 exact
                 path="/classes"
-                dummyData={dummyData}
                 component={ClassList}
               />
               <PrivateRoute
                 path="/classes/:id"
-                dummyData={dummyData}
                 component={ClassDetails}
               />
 
