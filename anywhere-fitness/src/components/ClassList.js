@@ -6,9 +6,9 @@ const ClassList = props => {
   console.log(props.Data)
   return (
     <div>
-      {/* {props.Data.map(classItem => (
-        <MovieLink  key={classItem.id}  classItem={classItem} />
-      ))} */}
+      {props.Data.map(classItem => (
+        <ClassLink  key={classItem.id}  classItem={classItem} />
+      ))}
 
       <p>classList</p>
     </div>
@@ -17,8 +17,8 @@ const ClassList = props => {
   
 };
 
-const MovieLink = ({classItem}, props) => {
-  console.log("movielink",classItem.id)
+const ClassLink = ({classItem}, props) => {
+  console.log("ClassLink",classItem.id)
   const {name, type, location} = classItem;
   return(
     <NavLink to ={`/classes/${classItem.id}`}>
