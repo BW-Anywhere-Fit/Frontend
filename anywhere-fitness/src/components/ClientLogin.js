@@ -76,6 +76,14 @@ export default function ClientLogin() {
                     >
                     </TextField>
 
+        <form className={styling.form}>
+          <TextField
+            id="email"
+            label="Email Address"
+            name="email"
+            fullWidth
+          ></TextField>
+
 
                     <Button className={styling.button} disabled={!validateForm()}
                         type='submit'
@@ -85,20 +93,30 @@ export default function ClientLogin() {
                         Login
                 </Button>
 
-                    <Grid>
 
-                        <Grid item xs>
-                            <Link>
-                                {"Don't have an account? Sign Up "}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <div>{message}</div>
-        </Container>
-    )
+          <Button
+            className={styling.button}
+            type="submit"
+            variant="contained"
+            fullWidth
+          >
+            Login
+          </Button>
+
+
+          <Grid>
+            <Grid item xs>
+              <Link to="/register-form">Don't have an account? Sign Up </Link>
+            </Grid>
+            <Link to="/instructor-login">Instructor Login</Link>
+          </Grid>
+        </form>
+      </div>
+    </Container>
+  );
 }
+
+                        
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -117,3 +135,4 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(3, 0, 3),
     },
 }));
+

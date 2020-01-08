@@ -59,7 +59,7 @@ const UserProvider = ({ children }) => {
   // handle initial render (including page refreshes)
   React.useEffect(() => {
     // axiosWithAuth()
-    //   .get("")
+    //   .get("url")
     //   .then(res => {
     //     dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
     //   })
