@@ -48,25 +48,37 @@ const UserProvider = ({ children }) => {
     initialState
   );
 
-  /**
-   * VALUE:
-   * user (x)
-   * login function
-   * logout function
-   * handle page refresh (hydrate the user)
-   */
-
-  // handle initial render (including page refreshes)
   React.useEffect(() => {
-    // axiosWithAuth()
-    //   .get("url")
-    //   .then(res => {
-    //     dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
-    //   })
-    //   .catch(err => {
-    //     dispatch({ type: FETCH_ERROR, error: err.response });
-    //   });
+    axiosWithAuth()
+      .get("url")
+      .then(res => {
+        dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_ERROR, error: err.response });
+      });
   }, []);
+
+  const register = ({ username, password, instructor }) => {
+    if (!username || !password) {
+      throw new Error("username and password are required");
+    }
+    dispatch({ type: FETCH_INIT });
+    axiosWithAuth()
+      .post("/clients/register", {
+        username,
+        password,
+        instructor
+      })
+      .then(res => {
+        console.log("response", res);
+        // dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
+      })
+      .catch(err => {
+        console.log(err);
+        // dispatch({ type: FETCH_ERROR, error: err.response });
+      });
+  };
 
   const login = ({ username, password }) => {
     if (!username || !password) {
@@ -75,16 +87,8 @@ const UserProvider = ({ children }) => {
 
     dispatch({ type: FETCH_INIT });
 
-    // axios
-    //   .post("/login", { username, password })
-    //   .then(res => {
-    //     localStorage.setItem("token", res.data.payload.token);
-    //     dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
-    //   })
-    //   .catch(err => {
-    //     dispatch({ type: FETCH_ERROR, error: err.response });
-    //   });
-    fakeAxios()
+    axiosWithAuth()
+      .post("/login", { username, password })
       .then(res => {
         localStorage.setItem("token", res.data.payload.token);
         dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
@@ -94,39 +98,28 @@ const UserProvider = ({ children }) => {
       });
   };
 
-  const logout = () => {
-    dispatch({ type: FETCH_INIT });
-    axios
-      .post("/logout")
-      .then(res => {
-        localStorage.removeItem("token");
-        dispatch({ type: FETCH_SUCCESS, data: null });
-      })
-      .catch(err => {
-        dispatch({ type: FETCH_ERROR, error: err.response });
-      });
-  };
-
   const value = {
     user: { error, loading, data },
-    login,
-    logout
+    register,
+    login
   };
 
-  console.log({ value });
+  // console.log({ value });
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export default UserProvider;
 
-const fakeAxios = () => {
-  return new Promise((resolve, reject) => {
-    const num = Math.random();
-    if (num > 0.75) {
-      reject({ response: "this errored" });
-    }
-
-    resolve({ data: { payload: { token: "12345" } } });
-  });
-};
+// const logout = () => {
+//   dispatch({ type: FETCH_INIT });
+//   axios
+//     .post("/logout")
+//     .then(res => {
+//       localStorage.removeItem("token");
+//       dispatch({ type: FETCH_SUCCESS, data: null });
+//     })
+//     .catch(err => {
+//       dispatch({ type: FETCH_ERROR, error: err.response });
+//     });
+// };
