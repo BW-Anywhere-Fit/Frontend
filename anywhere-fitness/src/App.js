@@ -12,7 +12,8 @@ import UserProvider from "./context/UserProvider";
 
 // import ClassCard from "./components/ClassCard";
 import ClassDetails from "./components/ClassDetails";
-import RegisterForm from "./components/RegisterForm";
+
+import RegisterFormClient from "./components/RegisterFormClient";
 
 // axios get, put, post
 // routing
@@ -43,7 +44,7 @@ function App() {
 
               <Route exact path="/" component={ClientLogin} />
               <Route path="/instructor-login" component={InstructorLogin} />
-              <Route path="/register-form" component={RegisterForm} />
+              <Route path="/register-form" component={RegisterFormClient} />
             </Switch>
           </Router>
         </div>
