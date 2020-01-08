@@ -20,7 +20,7 @@ const useStyles = makeStyles(style => ({
 }));
 
 const InstructorLogin = () => {
-  const { user, login } = useUser();
+  const { user, instructorLogin } = useUser();
   const styling = useStyles();
 
   const [instructorCredentials, setInstructorCredentials] = React.useState({
@@ -42,7 +42,7 @@ const InstructorLogin = () => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-    login(instructorCredentials);
+    instructorLogin(instructorCredentials);
   };
 
   return (

@@ -9,6 +9,7 @@ const FETCH_SUCCESS = "FETCH_SUCCESS";
 const FETCH_ERROR = "FETCH_ERROR";
 
 function reducer(state, action) {
+  // console.log("state", { state });
   switch (action.type) {
     case FETCH_INIT: {
       return {
@@ -59,13 +60,34 @@ const UserProvider = ({ children }) => {
       });
   }, []);
 
-  const register = ({ username, password, instructor }) => {
+  const clientRegister = ({ username, password, instructor }) => {
+    if (!username || !password) {
+      throw new Error("username and password are required");
+    }
+    dispatch({ type: FETCH_INIT });
+    axios
+      .post("https://bw-anywhere-fitness1.herokuapp.com/clients/register", {
+        username,
+        password,
+        instructor
+      })
+      .then(res => {
+        console.log("response", res);
+        // dispatch({ type: FETCH_SUCCESS, data: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+        // dispatch({ type: FETCH_ERROR, error: err.response });
+      });
+  };
+
+  const instructorRegister = ({ username, password, instructor }) => {
     if (!username || !password) {
       throw new Error("username and password are required");
     }
     dispatch({ type: FETCH_INIT });
     axiosWithAuth()
-      .post("/clients/register", {
+      .post("/auth/register", {
         username,
         password,
         instructor
@@ -80,7 +102,7 @@ const UserProvider = ({ children }) => {
       });
   };
 
-  const login = ({ username, password }) => {
+  const clientLogin = ({ username, password }) => {
     if (!username || !password) {
       throw new Error("username and password are required");
     }
@@ -88,8 +110,27 @@ const UserProvider = ({ children }) => {
     dispatch({ type: FETCH_INIT });
 
     axiosWithAuth()
-      .post("/login", { username, password })
+      .post("/clients/login", { username, password })
       .then(res => {
+        localStorage.setItem("token", res.data.token);
+        dispatch({ type: FETCH_SUCCESS, data: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_ERROR, error: err.response });
+      });
+  };
+
+  const instructorLogin = ({ username, password }) => {
+    if (!username || !password) {
+      throw new Error("username and password are required");
+    }
+
+    dispatch({ type: FETCH_INIT });
+
+    axiosWithAuth()
+      .post("/auth/login", { username, password })
+      .then(res => {
+        console.log(res);
         localStorage.setItem("token", res.data.payload.token);
         dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
       })
@@ -100,8 +141,10 @@ const UserProvider = ({ children }) => {
 
   const value = {
     user: { error, loading, data },
-    register,
-    login
+    clientRegister,
+    clientLogin,
+    instructorRegister,
+    instructorLogin
   };
 
   // console.log({ value });

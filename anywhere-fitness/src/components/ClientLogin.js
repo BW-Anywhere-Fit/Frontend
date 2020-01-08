@@ -12,10 +12,12 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import useUser from "../context/useUser";
 
 export default function ClientLogin() {
   const styling = useStyles();
   const [message, setMessage] = useState("");
+  const { clientLogin } = useUser();
 
   const [fields, handleFieldChange] = useFormFields({
     username: "",
@@ -39,15 +41,11 @@ export default function ClientLogin() {
     return fields.username.length > 0 && fields.password.length > 0;
   }
 
-  function handleSubmit(values, tools) {
-    axios
-      .post("http://localhost:4000/login", values)
-      .then(response => {
-        setMessage(response.data.message);
-        tools.resetForm();
-      })
-      .catch();
-  }
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(fields);
+    clientLogin(fields);
+  };
 
   return (
     <Container className={styling.root}>
@@ -79,13 +77,6 @@ export default function ClientLogin() {
             fullWidth
             onChange={handleFieldChange}
             value={fields.password}
-          ></TextField>
-          <label />
-          <TextField
-            id="email"
-            label="Email Address"
-            name="email"
-            fullWidth
           ></TextField>
 
           <Button
