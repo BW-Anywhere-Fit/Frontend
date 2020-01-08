@@ -45,7 +45,7 @@ function App() {
                 component={ClassDetails}
               />
 
-              <Route path="/member-login" component={ClientLogin} />
+              <Route exact path="/" component={ClientLogin} />
               <Route path="/instructor-login" component={InstructorLogin} />
               <Route path="/register-form" component={RegisterForm} />
             </Switch>

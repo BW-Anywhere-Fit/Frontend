@@ -29,7 +29,7 @@ const RegisterForm = () => {
         <label />
         <TextField name="name" type="password" placeholder="Password" />
         <Button className={styling.button}>
-          <Link to="/member-login">SIGN UP</Link>
+          <Link to="/">SIGN UP</Link>
         </Button>
       </form>
     </Container>

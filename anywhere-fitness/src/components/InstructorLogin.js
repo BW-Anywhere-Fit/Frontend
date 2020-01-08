@@ -78,7 +78,7 @@ const InstructorLogin = () => {
               Login
             </Button>
           </div>
-          <Link to="/member-login">Not an Instructor?</Link>
+          <Link to="/">Not an Instructor?</Link>
         </Grid>
       </form>
     </Container>
