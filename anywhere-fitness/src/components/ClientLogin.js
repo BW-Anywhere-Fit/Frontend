@@ -8,9 +8,9 @@ import {
   Typography,
   TextField,
   Button,
-  Grid,
-  Link
+  Grid
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 export default function ClientLogin() {
