@@ -1,12 +1,27 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import { Container, Grid } from "@material-ui/core";
+
 import useUser from "../context/useUser";
+
+const useStyles = makeStyles(style => ({
+  login: {
+    display: "flex",
+    flexDirection: "column",
+    width: "450px"
+  },
+  button: {
+    margin: style.spacing(3, 0, 3)
+  }
+}));
 
 const InstructorLogin = () => {
   const { user, login } = useUser();
+  const styling = useStyles();
 
   const [instructorCredentials, setInstructorCredentials] = React.useState({
     username: "",
@@ -31,10 +46,10 @@ const InstructorLogin = () => {
   };
 
   return (
-    <div>
+    <Container>
       {/* this can be a card// implement material ui  */}
       <h1>Instructor Login</h1>
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit} className={styling.login}>
         <label />
         <TextField
           required
@@ -46,15 +61,27 @@ const InstructorLogin = () => {
         />
         <label />
         <TextField
+          required
           label="password"
           type="password"
           name="password"
           onChange={handleOnChange}
           value={instructorCredentials.password}
         />
-        <Button type="submit">Login</Button>
+        <Grid>
+          <div>
+            <Button
+              className={styling.button}
+              type="submit"
+              variant="contained"
+            >
+              Login
+            </Button>
+          </div>
+          <Link to="/">Not an Instructor?</Link>
+        </Grid>
       </form>
-    </div>
+    </Container>
   );
 };
 
