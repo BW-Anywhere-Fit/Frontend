@@ -26,7 +26,7 @@ export default function ClientLogin() {
     const [fields, setValues] = useState(initialState);
     return [
       fields,
-      function(event) {
+      function (event) {
         setValues({
           ...fields,
           [event.target.id]: event.target.value
@@ -39,14 +39,8 @@ export default function ClientLogin() {
     return fields.username.length > 0 && fields.password.length > 0;
   }
 
-  function handleSubmit(values, tools) {
-    axios
-      .post("http://localhost:4000/login", values)
-      .then(response => {
-        setMessage(response.data.message);
-        tools.resetForm();
-      })
-      .catch();
+  function handleOnSubmit() {
+    return ('Welcome Back')
   }
 
   return (
@@ -56,7 +50,7 @@ export default function ClientLogin() {
           Client Login
         </Typography>
 
-        <form className={styling.form} onSubmit={handleSubmit}>
+        <form className={styling.form} onSubmit={handleOnSubmit()}>
           <label />
           <TextField
             required
@@ -106,7 +100,7 @@ export default function ClientLogin() {
           </Grid>
         </form>
       </div>
-     
+
     </Container>
   );
 }
@@ -130,15 +124,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-
 // add event listenner
-const loginButton = document.querySelector('.styling.button');
-// loginButton.addEventListener('click', event => {
-//     alert('Welcome Back!')
-// })
-
-// event listener back-up
 const formColorChange = document.querySelector('div')
 formColorChange.addEventListener('mouseenter', event => {
-    event.target.style.color = 'purple';
+  event.target.style.color = 'purple';
 });
