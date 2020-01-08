@@ -18,7 +18,8 @@ const useStyles = makeStyles(style => ({
 
 const RegisterFormClient = () => {
   const styling = useStyles();
-  const { register } = useUser();
+  const { user, clientRegister } = useUser();
+  // console.log("user", { user });
 
   const [clientCredentials, setClientCredentials] = React.useState({
     username: "",
@@ -36,7 +37,7 @@ const RegisterFormClient = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    register(clientCredentials);
+    clientRegister(clientCredentials);
   };
 
   return (
@@ -59,9 +60,10 @@ const RegisterFormClient = () => {
           value={clientCredentials.password}
           placeholder="Password"
         />
-        <Button className={styling.button}>
-          <Link to="/">SIGN UP</Link>
+        <Button type="submit" className={styling.button}>
+          SIGN UP
         </Button>
+        <Link to="/">Login</Link>
       </form>
     </Container>
   );
