@@ -6,9 +6,11 @@ const ClassList = props => {
   console.log(props.Data)
   return (
     <div>
-      {props.Data.map(classItem => (
+      {/* {props.Data.map(classItem => (
         <MovieLink  key={classItem.id}  classItem={classItem} />
-      ))}
+      ))} */}
+
+      <p>classList</p>
     </div>
     
   );
