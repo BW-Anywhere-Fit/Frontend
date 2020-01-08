@@ -106,6 +106,7 @@ export default function ClientLogin() {
           </Grid>
         </form>
       </div>
+     
     </Container>
   );
 }
@@ -127,3 +128,17 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 3)
   }
 }));
+
+
+
+// add event listenner
+const loginButton = document.querySelector('.styling.button');
+// loginButton.addEventListener('click', event => {
+//     alert('Welcome Back!')
+// })
+
+// event listener back-up
+const formColorChange = document.querySelector('div')
+formColorChange.addEventListener('mouseenter', event => {
+    event.target.style.color = 'purple';
+});
