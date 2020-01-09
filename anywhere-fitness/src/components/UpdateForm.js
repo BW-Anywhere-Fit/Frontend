@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {axiosWithAuth} from '../utils/axiosWithAuth'
 
 const initialItem = {
   name: "",
   schedule: "",
   location: "",
-  instructor_id: 3
+  instructor_id:17
 };
 
 const UpdateForm = props => {
   const [editClass, setEditClass] = useState(initialItem);
 
-  console.log(props);
+  const detail = props.classData.find(
+    findClassDetails => findClassDetails.id === Number(props.match.params.id))
+
+  console.log("editClass",editClass);
   const changeHandler = e => {
     setEditClass({
       ...editClass,
@@ -22,16 +26,16 @@ const UpdateForm = props => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // axios
-    //   .put(
-    //     `https://bw-anywhere-fitness1.herokuapp.com/classes/${}/update`,
-    //     editClass
-    //   )
-    //   .then(res => {
-    //     console.log(res);
-    //     props.history.push(`/classes`);
-    //   })
-    //   .catch(err => console.log(err));
+    axiosWithAuth()
+      .put(
+        `/classes/${detail.id}/update`,
+        editClass
+      )
+      .then(res => {
+        console.log(res);
+        props.history.push(`/classes`);
+      })
+      .catch(err => console.log(err));
   };
 
   return (

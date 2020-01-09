@@ -22,9 +22,11 @@ const ClassDetails = props => {
   const deleteClass = () => {
     axiosWithAuth()
       .delete(`classes/${props.match.params.id}`)
-      .then(res => console.log(res))
+      .then(res => {
+        props.setDepend(!props.depend)
+      })
       .catch(err => console.log(err));
-    props.setDepend(!props.depend);
+    
     props.history.push("/classes");
   };
 
@@ -36,8 +38,8 @@ const ClassDetails = props => {
         <li>{details.schedule}</li>
         <li>{details.location}</li>
       </ul>
-      <Link to="/update-form/:id"> EDIT </Link>
-      <Button type="delete" onClick={deleteClass}>
+      <Link to={`/update-form/${details.id}`}> EDIT </Link>
+      <Button type="submit" onClick={deleteClass}>
         Delete
       </Button>
     </div>
