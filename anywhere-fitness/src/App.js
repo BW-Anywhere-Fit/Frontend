@@ -16,6 +16,7 @@ import ClassDetails from "./components/ClassDetails";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 import RegisterFormClient from "./components/RegisterFormClient";
+import UpdateForm from "./components/UpdateForm";
 
 // axios get, put, post
 // routing
@@ -25,7 +26,7 @@ function App() {
   const [depend, setDepend] = useState(false);
   useEffect(() => {
     axiosWithAuth()
-      .get("classes/")
+      .get("/classes")
       .then(res => {
         console.log("res", res);
         setClassData(res.data);
@@ -64,6 +65,17 @@ function App() {
               <Route exact path="/" component={ClientLogin} />
               <Route path="/instructor-login" component={InstructorLogin} />
               <Route path="/register-form" component={RegisterFormClient} />
+              <Route
+                path="/update-form/:id"
+                render={props => (
+                  <UpdateForm
+                    {...props}
+                    setDepend={setDepend}
+                    depend={depend}
+                    classData={classData}
+                  />
+                )}
+              />
               <Route
                 path="/register-form-instructor"
                 component={RegisterFormInstructor}
