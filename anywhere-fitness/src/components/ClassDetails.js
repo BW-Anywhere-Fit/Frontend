@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Axios from "axios";
+import { Link } from "react-router-dom";
 // import ClassCard from './ClassCard';
 const ClassDetails = props => {
   console.log(props);
@@ -25,6 +27,7 @@ const ClassDetails = props => {
     props.setDepend(!props.depend);
     props.history.push("/classes");
   };
+
   return (
     <div>
       <h2>"ClassDetails"</h2>
@@ -33,7 +36,7 @@ const ClassDetails = props => {
         <li>{details.schedule}</li>
         <li>{details.location}</li>
       </ul>
-      <Button type="submit">Edit</Button>
+      <Link to="/update-form/:id"> EDIT </Link>
       <Button type="delete" onClick={deleteClass}>
         Delete
       </Button>
