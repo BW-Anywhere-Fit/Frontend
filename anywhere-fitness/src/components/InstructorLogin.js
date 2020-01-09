@@ -19,7 +19,7 @@ const useStyles = makeStyles(style => ({
   }
 }));
 
-const InstructorLogin = () => {
+const InstructorLogin = (props) => {
   const { user, instructorLogin } = useUser();
   const styling = useStyles();
 
@@ -28,9 +28,7 @@ const InstructorLogin = () => {
     password: ""
   });
 
-  if (user.data) {
-    return <Redirect to="/classes" />;
-  }
+
 
   const handleOnChange = e => {
     e.preventDefault();
@@ -39,10 +37,12 @@ const InstructorLogin = () => {
       [e.target.name]: e.target.value
     });
   };
-
+  
   const handleOnSubmit = e => {
     e.preventDefault();
+    console.log(instructorLogin)
     instructorLogin(instructorCredentials);
+    
   };
 
   return (
@@ -79,6 +79,7 @@ const InstructorLogin = () => {
             </Button>
           </div>
           <Link to="/">Not an Instructor?</Link>
+          <Link to="/register-form-instructor"> Instructor Register</Link>
         </Grid>
       </form>
     </Container>
