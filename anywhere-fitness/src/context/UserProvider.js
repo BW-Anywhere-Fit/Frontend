@@ -86,22 +86,21 @@ const UserProvider = ({ children }) => {
       throw new Error("username and password are required");
     }
     dispatch({ type: FETCH_INIT });
-    axiosWithAuth()
-      .post("/auth/register", {
+    axios
+      .post("https://bw-anywhere-fitness1.herokuapp.com/auth/register", {
         username,
         password,
         instructor
       })
       .then(res => {
         console.log("response", res);
-        // dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
+        // dispatch({ type: FETCH_SUCCESS, data: res.data });
       })
       .catch(err => {
         console.log(err);
         // dispatch({ type: FETCH_ERROR, error: err.response });
       });
   };
-
   const clientLogin = ({ username, password }) => {
     if (!username || !password) {
       throw new Error("username and password are required");
@@ -130,8 +129,8 @@ const UserProvider = ({ children }) => {
     axiosWithAuth()
       .post("/auth/login", { username, password })
       .then(res => {
-        console.log(res);
-        localStorage.setItem("token", res.data.payload.token);
+        console.log("res",res);
+        localStorage.setItem("token", res.data.token);
         dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
       })
       .catch(err => {

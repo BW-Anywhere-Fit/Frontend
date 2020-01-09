@@ -7,6 +7,7 @@ import ClientLogin from "./components/ClientLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import ClassList from "./components/ClassList";
 import NavBar from "./components/NavBar";
+import RegisterFormInstructor from "./components/RegisterFormInstructor"
 
 import UserProvider from "./context/UserProvider";
 
@@ -45,6 +46,7 @@ function App() {
               <Route exact path="/" component={ClientLogin} />
               <Route path="/instructor-login" component={InstructorLogin} />
               <Route path="/register-form" component={RegisterFormClient} />
+              <Route path="/register-form-instructor" component={RegisterFormInstructor} />
             </Switch>
           </Router>
         </div>
