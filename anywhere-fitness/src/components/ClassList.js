@@ -6,7 +6,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import CreateClassForm from "./CreateClassForm";
 
 const ClassList = props => {
-  console.log(props);
+  // console.log(props);
   const instructor = localStorage.getItem("instructor");
 
   const addClass = classText => {
@@ -14,6 +14,7 @@ const ClassList = props => {
       .post("/classes", classText)
       .then(res => console.log(res))
       .catch(err => console.log(err));
+    props.setDepend(!props.depend);
   };
 
   return (

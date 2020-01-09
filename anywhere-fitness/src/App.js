@@ -13,7 +13,7 @@ import UserProvider from "./context/UserProvider";
 
 // import ClassCard from "./components/ClassCard";
 import ClassDetails from "./components/ClassDetails";
-import {axiosWithAuth} from './utils/axiosWithAuth'
+import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 import RegisterFormClient from "./components/RegisterFormClient";
 
@@ -21,21 +21,17 @@ import RegisterFormClient from "./components/RegisterFormClient";
 // routing
 
 function App() {
-  const [classData, setClassData] = useState([])
-  const [depend, setDepend] = useState(false)
+  const [classData, setClassData] = useState([]);
+  const [depend, setDepend] = useState(false);
   useEffect(() => {
     axiosWithAuth()
-          .get("classes/")
-          .then(res => {
-            
-            console.log("res",res)
-            setClassData(res.data)
-          })
-          .catch(err => {
-            
-          });
-  },[depend])
-
+      .get("classes/")
+      .then(res => {
+        console.log("res", res);
+        setClassData(res.data);
+      })
+      .catch(err => {});
+  }, [depend]);
 
   return (
     <div className="Page">
@@ -48,8 +44,22 @@ function App() {
             {/* <Link to="/instructor-login">Instructor Login</Link> */}
 
             <Switch>
-              <PrivateRoute exact path="/classes" setClassData={setClassData} setDepend={setDepend} classData={classData} component={ClassList} />
-              <PrivateRoute path="/classes/:id" setDepend={setDepend} classData={classData} component={ClassDetails} />
+              <PrivateRoute
+                exact
+                path="/classes"
+                setClassData={setClassData}
+                setDepend={setDepend}
+                depend={depend}
+                classData={classData}
+                component={ClassList}
+              />
+              <PrivateRoute
+                path="/classes/:id"
+                setDepend={setDepend}
+                depend={depend}
+                classData={classData}
+                component={ClassDetails}
+              />
 
               <Route exact path="/" component={ClientLogin} />
               <Route path="/instructor-login" component={InstructorLogin} />

@@ -43,20 +43,11 @@ const initialState = {
   data: null
 };
 
-
-
 const UserProvider = ({ children }) => {
   const [{ error, loading, data }, dispatch] = React.useReducer(
     reducer,
     initialState
   );
-
-
- 
-      
-
-    
-
 
   const clientRegister = ({ username, password, instructor }) => {
     if (!username || !password) {
@@ -124,16 +115,14 @@ const UserProvider = ({ children }) => {
 
     dispatch({ type: FETCH_INIT });
 
-    
-
     axiosWithAuth()
       .post("/auth/login", { username, password })
       .then(res => {
-        console.log("res instructor",res);
+        console.log("res instructor", res);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("instructor", res.data.instructor);
-        localStorage.setItem("instructorID",res.data.id)
-        dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
+        localStorage.setItem("instructorID", res.data.id);
+        dispatch({ type: FETCH_SUCCESS, data: res.data });
       })
       .catch(err => {
         dispatch({ type: FETCH_ERROR, error: err.response });
@@ -145,8 +134,7 @@ const UserProvider = ({ children }) => {
     clientRegister,
     clientLogin,
     instructorRegister,
-    instructorLogin,
-    
+    instructorLogin
   };
 
   // console.log({ value });

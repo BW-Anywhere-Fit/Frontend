@@ -22,7 +22,7 @@ const useStyles = makeStyles(style => ({
 const InstructorLogin = props => {
   const { user, instructorLogin } = useUser();
   const { data } = user;
-  console.log({ data });
+
   const styling = useStyles();
 
   const [instructorCredentials, setInstructorCredentials] = React.useState({
@@ -40,10 +40,9 @@ const InstructorLogin = props => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-    console.log(instructorLogin);
     instructorLogin(instructorCredentials);
 
-    props.history.push('/classes');
+    props.history.push("/classes");
   };
 
   return (
