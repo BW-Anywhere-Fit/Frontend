@@ -1,24 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ClassCard from "./ClassCard";
 import { NavLink } from "react-router-dom";
+import useUser from "../context/useUser";
+import {axiosWithAuth} from '../utils/axiosWithAuth'
 
 const ClassList = props => {
-  console.log(props);
+console.log(props)
+
   return (
     <div>
-      <h1>Hello</h1>
+      {props.classData.map(data => {
+        return(
+           <ClassLink key={data.id} data={data}/>
+        )
+       
+      })}
     </div>
   );
 };
 
+const ClassLink = ({ data }) => {
+  const { name, type, location } = data;
+  return (
+    <NavLink to={`/classes/${data.id}`}>
+      <ClassCard name={name} type={type} location={location} />
+    </NavLink>
+  );
+};
+
+
 export default ClassList;
 
-// const ClassLink = ({ classItem }, props) => {
-//   console.log("ClassLink", classItem.id);
-//   const { name, type, location } = classItem;
-//   return (
-//     <NavLink to={`/classes/${classItem.id}`}>
-//       <ClassCard name={name} type={type} location={location} />
-//     </NavLink>
-//   );
-// };
+

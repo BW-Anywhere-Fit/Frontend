@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -13,6 +13,7 @@ import UserProvider from "./context/UserProvider";
 
 // import ClassCard from "./components/ClassCard";
 import ClassDetails from "./components/ClassDetails";
+import {axiosWithAuth} from './utils/axiosWithAuth'
 
 import RegisterFormClient from "./components/RegisterFormClient";
 
@@ -20,6 +21,22 @@ import RegisterFormClient from "./components/RegisterFormClient";
 // routing
 
 function App() {
+  const [classData, setClassData] = useState([])
+  const [depend, setDepend] = useState(false)
+  useEffect(() => {
+    axiosWithAuth()
+          .get("classes/")
+          .then(res => {
+            
+            console.log("res",res)
+            setClassData(res.data)
+          })
+          .catch(err => {
+            
+          });
+  },[depend])
+
+
   return (
     <div className="Page">
       <UserProvider>
@@ -31,8 +48,8 @@ function App() {
             {/* <Link to="/instructor-login">Instructor Login</Link> */}
 
             <Switch>
-              <PrivateRoute exact path="/classes" component={ClassList} />
-              <PrivateRoute path="/classes/:id" component={ClassDetails} />
+              <PrivateRoute exact path="/classes" setClassData={setClassData} setDepend={setDepend} classData={classData} component={ClassList} />
+              <PrivateRoute path="/classes/:id" setDepend={setDepend} classData={classData} component={ClassDetails} />
 
               <Route exact path="/" component={ClientLogin} />
               <Route path="/instructor-login" component={InstructorLogin} />
