@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -19,16 +19,16 @@ const useStyles = makeStyles(style => ({
   }
 }));
 
-const InstructorLogin = (props) => {
+const InstructorLogin = props => {
   const { user, instructorLogin } = useUser();
+  const { data } = user;
+  console.log({ data });
   const styling = useStyles();
 
   const [instructorCredentials, setInstructorCredentials] = React.useState({
     username: "",
     password: ""
   });
-
-
 
   const handleOnChange = e => {
     e.preventDefault();
@@ -37,12 +37,11 @@ const InstructorLogin = (props) => {
       [e.target.name]: e.target.value
     });
   };
-  
+
   const handleOnSubmit = e => {
     e.preventDefault();
-    console.log(instructorLogin)
+    console.log(instructorLogin);
     instructorLogin(instructorCredentials);
-    
   };
 
   return (

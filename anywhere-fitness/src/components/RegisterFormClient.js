@@ -19,7 +19,7 @@ const useStyles = makeStyles(style => ({
 const RegisterFormClient = () => {
   const styling = useStyles();
   const { user, clientRegister } = useUser();
-  // console.log("user", { user });
+  console.log({ user });
 
   const [clientCredentials, setClientCredentials] = React.useState({
     username: "",
