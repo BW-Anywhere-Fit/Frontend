@@ -2,7 +2,6 @@
 // implement material ui
 
 import React, { useState } from "react";
-import axios from "axios";
 import {
   Container,
   Typography,
@@ -14,10 +13,9 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import useUser from "../context/useUser";
 
-export default function ClientLogin() {
+export default function ClientLogin(props) {
   const styling = useStyles();
-  const [message, setMessage] = useState("");
-  const { clientLogin } = useUser();
+  const { user, clientLogin } = useUser();
 
   const [fields, handleFieldChange] = useFormFields({
     username: "",
@@ -43,8 +41,8 @@ export default function ClientLogin() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(fields);
     clientLogin(fields);
+    props.history.push("/classes");
   };
 
   return (
