@@ -3,11 +3,13 @@ import { TextField, Button } from "@material-ui/core";
 
 const CreateClassForm = props => {
   console.log(props);
+
+  const instructorID = localStorage.getItem("instructorID");
   const [classText, setClassText] = React.useState({
     name: "",
     schedule: "",
     location: "",
-    id: ""
+    instructor_id: instructorID
   });
 
   const handleChange = e => {
@@ -19,6 +21,7 @@ const CreateClassForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    props.addClass(classText);
   };
 
   return (
@@ -27,6 +30,7 @@ const CreateClassForm = props => {
       <form onSubmit={handleSubmit} className="">
         <label />
         <TextField
+          required
           placeholder="Name"
           type="text"
           name="name"
@@ -35,24 +39,24 @@ const CreateClassForm = props => {
         />
         <label />
         <TextField
-          placeholder="location"
-          type="text"
-          onChange={handleChange}
-          value={classText.location}
-        />
-        <label />
-        <TextField
+          required
           placeholder="schedule"
+          name="schedule"
+          type="text"
           onChange={handleChange}
           value={classText.schedule}
         />
         <label />
         <TextField
-          placeholder="i"
+          required
+          type="text"
+          name="location"
+          placeholder="location"
           onChange={handleChange}
-          value={classText.id}
+          value={classText.location}
         />
-        <Button type="submit"> add Class</Button>
+
+        <Button type="submit">ADD CLASS</Button>
       </form>
     </>
   );
