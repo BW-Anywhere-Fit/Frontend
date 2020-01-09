@@ -42,7 +42,8 @@ const InstructorLogin = props => {
     e.preventDefault();
     console.log(instructorLogin);
     instructorLogin(instructorCredentials);
-    props.history.push("/classes");
+
+    props.history.push('/classes');
   };
 
   return (
