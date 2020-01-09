@@ -124,12 +124,15 @@ const UserProvider = ({ children }) => {
 
     dispatch({ type: FETCH_INIT });
 
+    
+
     axiosWithAuth()
       .post("/auth/login", { username, password })
       .then(res => {
         console.log("res instructor",res);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("instructor", res.data.instructor);
+        localStorage.setItem("instructorID",res.data.id)
         dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
       })
       .catch(err => {
