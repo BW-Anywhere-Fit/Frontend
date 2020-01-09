@@ -127,8 +127,9 @@ const UserProvider = ({ children }) => {
     axiosWithAuth()
       .post("/auth/login", { username, password })
       .then(res => {
-        console.log("res",res);
+        console.log("res instructor",res);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("instructor", res.data.instructor);
         dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
       })
       .catch(err => {
