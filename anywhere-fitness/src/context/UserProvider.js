@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 
@@ -43,22 +43,20 @@ const initialState = {
   data: null
 };
 
+
+
 const UserProvider = ({ children }) => {
   const [{ error, loading, data }, dispatch] = React.useReducer(
     reducer,
     initialState
   );
 
-  React.useEffect(() => {
-    axiosWithAuth()
-      .get("url")
-      .then(res => {
-        dispatch({ type: FETCH_SUCCESS, data: res.data.payload });
-      })
-      .catch(err => {
-        dispatch({ type: FETCH_ERROR, error: err.response });
-      });
-  }, []);
+
+ 
+      
+
+    
+
 
   const clientRegister = ({ username, password, instructor }) => {
     if (!username || !password) {
@@ -143,7 +141,8 @@ const UserProvider = ({ children }) => {
     clientRegister,
     clientLogin,
     instructorRegister,
-    instructorLogin
+    instructorLogin,
+    
   };
 
   // console.log({ value });
