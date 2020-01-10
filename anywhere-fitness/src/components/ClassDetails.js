@@ -21,12 +21,13 @@ const ClassDetails = props => {
 
   const deleteClass = () => {
     axiosWithAuth()
-      .delete(`classes/${props.match.params.id}`)
+      .delete(`/classes/${props.match.params.id}`)
       .then(res => {
-        props.setDepend(!props.depend)
+        console.log(res);
       })
       .catch(err => console.log(err));
-    
+
+    props.setDepend(!props.depend);
     props.history.push("/classes");
   };
 

@@ -32,7 +32,7 @@ function App() {
         setClassData(res.data);
       })
       .catch(err => {});
-  }, []);
+  }, [depend]);
 
   return (
     <div className="Page">
