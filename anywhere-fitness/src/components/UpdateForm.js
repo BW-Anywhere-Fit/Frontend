@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import axios from "axios";
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 
-const initialItem = {
-  name: "",
-  schedule: "",
-  location: "",
-  instructor_id:17
-};
 
+
+
+const instructorID = localStorage.getItem("instructorID");
 const UpdateForm = props => {
-  const [editClass, setEditClass] = useState(initialItem);
-
   const detail = props.classData.find(
     findClassDetails => findClassDetails.id === Number(props.match.params.id))
+  const [editClass, setEditClass] = useState({
+    name: "",
+    schedule: "",
+    location: "",
+    instructor_id: instructorID
+    // instructor_id: detail.instructor_id
+  });
+
+
+
+
+    console.log("instructor id", detail.instructor_id)
 
   console.log("editClass",editClass);
   const changeHandler = e => {
@@ -33,6 +40,7 @@ const UpdateForm = props => {
       )
       .then(res => {
         console.log(res);
+        props.setDepend(!props.depend)
         props.history.push(`/classes`);
       })
       .catch(err => console.log(err));
